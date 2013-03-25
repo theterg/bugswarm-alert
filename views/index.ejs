@@ -3,18 +3,27 @@
 <table id=alerts class="table table-bordered table-striped table-hover">
 		<tr>
 			<th>SMS</th>
-			<th>ResourceID</th>
+			<th>Board ID</th>
 			<th>Feed</th>
 			<th>Threshold</th>
 			<th>Actions</th>
 		</tr>
 		<tr>
-			<td><input id=smsnum></input></td>
-			<td><input id=resourceid></input></td>
-			<td><input id=feed></input></td>
-			<td><input id=thresh></input></td>
-			<td><button onclick="createObj();">Add</button>
-				<button onclick="cancelEdit();">Cancel</button></td>
+			<td><input id=smsnum value="Enter Phone #"></input></td>
+			<td><input id=resourceid value="Select an item below"></input></td>
+			<td><input id=feed value="Acceleration"></input></td>
+			<td><input id=thresh value="1.0"></input></td>
+			<td><button class=button onclick="createObj();">Add</button></td>
+		</tr>
+			<td colspan="5">
+			<ul id="logos">
+				<li><a href="#" onclick="selectRes('iphone');" class=resourceicon style="background-image: url(images/iphone_icon.png);"></a></li>
+				<li><a href="#" onclick="selectRes('rtx');" class=resourceicon style="background-image: url(images/rtx_icon.png);"></a></li>
+				<li><a href="#" onclick="selectRes('rl78g14');" class=resourceicon style="background-image: url(images/rl78g14_icon.png);"></a></li>
+			</ul>
+			</td>
+		<tr>
+
 		</tr>
 </table>
 
@@ -22,7 +31,7 @@
 <table id=alerts class="table table-bordered table-striped table-hover">
 		<tr>
 			<th>SMS</th>
-			<th>ResourceID</th>
+			<th>Board ID</th>
 			<th>Feed</th>
 			<th>Threshold</th>
 			<th>Actions</th>
@@ -31,11 +40,10 @@
 		var alert = alerts[idx]; %>
 		<tr id="<%=alert.id%>">
 			<td>+1******<%=alert.smsnum.substring(8,12)%></td>
-			<td>****<%=alert.resourceid.substring(32,40)%></td>
+			<td><%=alert.board%></td>
 			<td><%=alert.feed%></td>
 			<td><%=alert.thresh%></td>
-			<td><button onclick="editItem(<%=alert.id%>);">Edit</button>
-				<button onclick="delItem(<%=alert.id%>);">Del</button>
+			<td><button class=button onclick="delItem(<%=alert.id%>);">Del</button>
 				</td>
 		</tr>
 	<%}%>

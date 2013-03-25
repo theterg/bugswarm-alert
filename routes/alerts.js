@@ -45,9 +45,13 @@ var list = function(req, res) {
 
 var create = function(req, res){
 	validate(req.body, function(err, obj) {
-		if (err) { res.send(500, obj); }
+		if (err) { 
+			console.log(obj);
+			res.send(500, obj); 
+		}
 		else {
 			alerts.addAlert(obj, function(err) {
+				console.log(JSON.stringify(err));
 				if (err) { res.send(500, JSON.stringify(err)); }
 				else { res.send(201, "Added"); }
 			});
