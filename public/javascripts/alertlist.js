@@ -73,3 +73,55 @@ function resourceIDToBoard(resourceid) {
 	}
 	return false;
 }
+
+$(document).ready(function() {
+	SWARM.connect({apikey: '7a849e6548dbd6f8034bb7cc1a37caa0b1a2654b',
+					resource: '433aa8bf77197e0d169b4dcae5cd914f97f1a5dd',
+					swarms: ['7179acadcf2ebfe425459a21ead970484fefc017'] });
+	$('div#iphonechart').swarmChart({
+		width: 300,
+		height: 200,
+		chart: {
+				series: { shadowSize: 0 }, // drawing is faster without shadows
+				grid: { color: "#FFF" },
+				legend: { backgroundColor: "#5C5D60" },
+				yaxis: { ticks: 0 }
+			},
+		swarm: SWARM,
+		resource: '8dac20b5f617f99d7aa83158a26a81e75a0118c4',
+		feed: 'Acceleration'
+	});
+	$('div#rtxchart').swarmChart({
+		width: 300,
+		height: 200,
+		chart: {
+				series: { shadowSize: 0 }, // drawing is faster without shadows
+				grid: { color: "#FFF" },
+				legend: { backgroundColor: "#5C5D60" },
+				yaxis: { ticks: 0,
+						min: -1500,
+						max: 1500,
+						tickColor: "#FFF" },
+				xaxis: {
+					tickColor: "#FFF"
+				}
+			},
+		swarm: SWARM,
+		resource: 'a2971cceb73e8aba1077aeaeb64ba666e79b2588',
+		feed: 'Acceleration',
+		feedvars: ['AccelX', 'AccelY', 'AccelZ']
+	});
+	$('div#rl78g14chart').swarmChart({
+		width: 300,
+		height: 200,
+		swarm: SWARM,
+		chart: {
+				series: { shadowSize: 0 }, // drawing is faster without shadows
+				grid: { color: "#FFF" },
+				legend: { backgroundColor: "#5C5D60" },
+				yaxis: { ticks: 0 }
+			},
+		resource: '5d1ec37218984a404ea6aba07ada5ff32d720e52',
+		feed: 'Acceleration'
+	});
+});

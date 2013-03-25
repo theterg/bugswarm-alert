@@ -45,9 +45,9 @@ var list = function(req, res) {
 
 var create = function(req, res){
 	validate(req.body, function(err, obj) {
-		if (err) { 
+		if (err) {
 			console.log(obj);
-			res.send(500, obj); 
+			res.send(500, obj);
 		}
 		else {
 			alerts.addAlert(obj, function(err) {
@@ -85,7 +85,7 @@ var update = function(req, res) {
 
 var del = function(req, res) {
 	alerts.delAlert(req.params.id, function(err) {
-		if (err) { 
+		if (err) {
 			res.send(500, JSON.stringify(err));
 		} else {
 			res.send(200, "Deleted");
