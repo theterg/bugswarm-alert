@@ -1,0 +1,42 @@
+<% layout('base') -%>
+<h3 class=center>Edit an Alert:</h3>
+<table id=alerts class="table table-bordered table-striped table-hover">
+		<tr>
+			<th>SMS</th>
+			<th>ResourceID</th>
+			<th>Feed</th>
+			<th>Threshold</th>
+			<th>Actions</th>
+		</tr>
+		<tr>
+			<td><input id=smsnum></input></td>
+			<td><input id=resourceid></input></td>
+			<td><input id=feed></input></td>
+			<td><input id=thresh></input></td>
+			<td><button onclick="createObj();">Add</button>
+				<button onclick="cancelEdit();">Cancel</button></td>
+		</tr>
+</table>
+
+<h3 class=center>List of alerts:</h3>
+<table id=alerts class="table table-bordered table-striped table-hover">
+		<tr>
+			<th>SMS</th>
+			<th>ResourceID</th>
+			<th>Feed</th>
+			<th>Threshold</th>
+			<th>Actions</th>
+		</tr>
+	<% for(var idx in alerts) {
+		var alert = alerts[idx]; %>
+		<tr id="<%=alert.id%>">
+			<td>+1******<%=alert.smsnum.substring(8,12)%></td>
+			<td>****<%=alert.resourceid.substring(32,40)%></td>
+			<td><%=alert.feed%></td>
+			<td><%=alert.thresh%></td>
+			<td><button onclick="editItem(<%=alert.id%>);">Edit</button>
+				<button onclick="delItem(<%=alert.id%>);">Del</button>
+				</td>
+		</tr>
+	<%}%>
+</table>

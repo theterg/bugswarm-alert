@@ -1,0 +1,1 @@
+curl -i -X POST -H "Content-Type: application/json" -d '{"smsnum":"+12223334444","swarmid":"156161a2b25b9d6d38b39e41d3c4ebabc59cb5c7","resourceid":"eb81af58239ac15f07f3643688069190145e852f","feed":"","thresh":0.0}' http://localhost:3000/alerts/
