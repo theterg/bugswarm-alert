@@ -58,6 +58,9 @@ var triggerAlert = function(row, data, feedVar) {
 		if (phone){
 			var board = alertroute.resourceIDToBoard(row.resourceid);
 			var d=new Date();
+			cooldown[key] = setTimeout(function() {
+				delete cooldown[key];
+			}, 5000);
 			phone.sendSms({
 				to: row.smsnum, // Any number Twilio can deliver to
 				from: config.twilio.outgoing,
@@ -68,9 +71,6 @@ var triggerAlert = function(row, data, feedVar) {
 			}, function(err, responseData) {
 				if (!err) {
 					console.log("Message status: "+responseData.status);
-					cooldown[key] = setTimeout(function() {
-						delete cooldown[key];
-					}, 5000);
 				} else {
 					console.log("ERR: Twilio error: ",err);
 				}
