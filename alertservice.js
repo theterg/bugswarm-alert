@@ -10,7 +10,7 @@ var cooldown = {};
 var deviceExceptions = {
 	'a2971cceb73e8aba1077aeaeb64ba666e79b2588': {		//RTX
 		Acceleration: {
-			threshScale: 0.001,
+			threshScale: 1000,
 			feedProp: false,
 			feedVars: ['AccelX', 'AccelY', 'AccelZ']
 		}
@@ -63,7 +63,7 @@ var triggerAlert = function(row, data, feedVar) {
 				from: config.twilio.outgoing,
 				body: "Swarm Alert: "+board+" "+row.feed+
 					" has exceeded the threshold of "+row.thresh+
-					" Measured at "+data[feedVar].toFixed(3)+" at "+
+					" Measured at "+parseFloat(data[feedVar]).toFixed(3)+" at "+
 					d.toUTCString()
 			}, function(err, responseData) {
 				if (!err) {
@@ -103,14 +103,14 @@ var onmessage = function(message) {
 			} else {
 				return;
 			}
-			console.log("Comparing "+JSON.stringify(data)+" to "+row.thresh);
+			console.log("Comparing "+JSON.stringify(data)+" to "+(row.thresh*opts.threshScale));
 			for (var jdx in opts.feedVars) {
 				var feedVar = opts.feedVars[jdx];
 				if (typeof(data) !== "object" || !(feedVar in data)){
 					console.log("WARN: could not find "+feedVar+" in "+JSON.stringify(data));
 					continue;
 				}
-				if (Math.abs(data[feedVar]) > row.thresh*opts.threshScale) {
+				if (Math.abs(parseFloat(data[feedVar])) > (row.thresh*opts.threshScale)) {
 					triggerAlert(row, data, feedVar);
 				}	
 			}
