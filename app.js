@@ -7,12 +7,14 @@ var express = require('express'),
   engine = require('ejs-locals'),
   routes = require('./routes'),
   http = require('http'),
-  path = require('path');
+  path = require('path'),
+  config = require('./config');
+  //SwarmConnection = require('bugswarm-prt').Swarm;
 
 var app = express();
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || config.port);
   app.set('views', __dirname + '/views');
   app.engine('ejs', engine);
   app.set('view engine', 'ejs');
@@ -35,3 +37,5 @@ routes.addRoutes(app);
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+
+//var consumer = new SwarmConnection(config);

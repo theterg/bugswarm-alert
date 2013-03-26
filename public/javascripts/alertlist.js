@@ -77,7 +77,6 @@ function resourceIDToBoard(resourceid) {
 
 $(document).ready(function() {
 	var manualUpdater = function(message) {
-		console.log(JSON.stringify(message));
 		if ((message.from.resource === boardmap.Mini) &&
 			("AccelX" in message.payload)){
 			$('div#minichart').swarmChart('update', {
