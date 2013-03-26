@@ -28,6 +28,20 @@ ul#logos li {
   display: inline-block;
   margin: 0;
 }
+ul.horiz-even {
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ul.horiz-even li {
+  display: inline-block;
+  
+}
+
+.horiz-fill li {
+  margin: 0 10%;
+}
 #header #buglabs-logo {
   float: left;
   position: relative;
@@ -103,9 +117,7 @@ a.resourceicon:hover {
 .right{
     text-align:right;
 }
-th{
-   padding: 3px 12px;
-}
+
 
 /* Table stuff, borrowed from Bootstrap */
 
@@ -154,3 +166,7 @@ th{
   background-color: #555555;
 }
 
+.sectionbox {
+  background-color: #494949;
+  border: 1px solid black;
+}

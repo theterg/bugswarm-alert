@@ -1,6 +1,15 @@
 <% layout('base') -%>
+<div>
+	<h3 class=center>Live Acceleration Data:</h3>
+	<ul class="horiz-even">
+		<li><div id="iphonechart"></div></li>
+		<li><div id="rtxchart"></div></li>
+		<li><div id="rl78g14chart"></div></li>
+	</ul>
+</div>
+
 <h3 class=center>Edit an Alert:</h3>
-<table id=alerts class="table table-bordered table-striped table-hover">
+<table id=alerts class="table table-bordered table-striped">
 		<tr>
 			<th>SMS</th>
 			<th>Board ID</th>
@@ -16,21 +25,12 @@
 			<td><button class=button onclick="createObj();">Add</button></td>
 		</tr>
 			<td colspan="5">
-			<ul id="logos">
-				<li><a href="#" onclick="selectRes('iphone');" class=resourceicon style="background-image: url(images/mini_full.png);"></a></li>
-				<li><a href="#" onclick="selectRes('rtx');" class=resourceicon style="background-image: url(images/F150_full.png);"></a></li>
-				<li><a href="#" onclick="selectRes('rl78g14');" class=resourceicon style="background-image: url(images/prius_full.png);"></a></li>
+			<ul class="horiz-even horiz-fill">
+				<li><a onclick="selectRes('iphone');" class=resourceicon style="background-image: url(images/mini_full.png);"></a></li>
+				<li><a onclick="selectRes('rtx');" class=resourceicon style="background-image: url(images/F150_full.png);"></a></li>
+				<li><a onclick="selectRes('rl78g14');" class=resourceicon style="background-image: url(images/prius_full.png);"></a></li>
 			</ul>
 			</td>
-		<tr>
-			<td colspan="5">
-			<ul id="logos">
-				<li><div id="iphonechart"></div></li>
-				<li><div id="rtxchart"></div></li>
-				<li><div id="rl78g14chart"></div></li>
-			</ul>
-			</td>
-		</tr>
 </table>
 
 <h3 class=center>List of alerts:</h3>

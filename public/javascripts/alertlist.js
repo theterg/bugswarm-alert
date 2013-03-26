@@ -1,6 +1,6 @@
 var boardmap = {
 	iphone: '8dac20b5f617f99d7aa83158a26a81e75a0118c4',
-	rtx: '6158b37aa046cac429158412ff6c6e451894ae5a',
+	rtx: 'a2971cceb73e8aba1077aeaeb64ba666e79b2588',
 	rl78g14: '55acc001d002e95de4c0885320efd4d52f0da95a',
 	example: 'eb81af58239ac15f07f3643688069190145e852f'
 };
@@ -75,9 +75,30 @@ function resourceIDToBoard(resourceid) {
 }
 
 $(document).ready(function() {
+	var manualUpdater = function(message) {
+		console.log(JSON.stringify(message));
+		if ((message.from.resource === boardmap.rtx) &&
+			("AccelX" in message.payload)){
+			$('div#rtxchart').swarmChart('update', {
+				x:message.payload.AccelX,
+				y:message.payload.AccelY,
+				z:message.payload.AccelZ}
+			);
+		}
+		if ((message.from.resource === boardmap.iphone) &&
+			("Acceleration" in message.payload) &&
+			(message.payload.Acceleration != "No data")){
+			$('div#iphonechart').swarmChart('update', {
+				x:message.payload.Acceleration.x,
+				y:message.payload.Acceleration.y,
+				z:message.payload.Acceleration.z}
+			);
+		}
+	};
 	SWARM.connect({apikey: '7a849e6548dbd6f8034bb7cc1a37caa0b1a2654b',
 					resource: '433aa8bf77197e0d169b4dcae5cd914f97f1a5dd',
-					swarms: ['7179acadcf2ebfe425459a21ead970484fefc017'] });
+					swarms: ['7179acadcf2ebfe425459a21ead970484fefc017'],
+					onmessage: manualUpdater });
 	$('div#iphonechart').swarmChart({
 		width: 300,
 		height: 200,
@@ -100,16 +121,13 @@ $(document).ready(function() {
 				legend: { backgroundColor: "#5C5D60" },
 				yaxis: { ticks: 0,
 						min: -1500,
-						max: 1500,
-						tickColor: "#FFF" },
-				xaxis: {
-					tickColor: "#FFF"
-				}
+						max: 1500 }
 			},
 		swarm: SWARM,
 		resource: 'a2971cceb73e8aba1077aeaeb64ba666e79b2588',
 		feed: 'Acceleration',
-		feedvars: ['AccelX', 'AccelY', 'AccelZ']
+		feedVars: ['x','y','z'],
+		numaxes: 3
 	});
 	$('div#rl78g14chart').swarmChart({
 		width: 300,

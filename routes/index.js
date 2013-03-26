@@ -5,9 +5,9 @@ var alerts = require('../models/alerts');
  */
 var boardmap = {
 	iphone: '8dac20b5f617f99d7aa83158a26a81e75a0118c4',
-	rtx: '6158b37aa046cac429158412ff6c6e451894ae5a',
+	rtx: 'a2971cceb73e8aba1077aeaeb64ba666e79b2588',
 	rl78g14: '55acc001d002e95de4c0885320efd4d52f0da95a',
-	test: 'eb81af58239ac15f07f3643688069190145e852f'
+	example: 'eb81af58239ac15f07f3643688069190145e852f'
 };
 
 function resourceIDToBoard(resourceid) {
