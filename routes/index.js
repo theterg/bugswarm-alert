@@ -36,7 +36,9 @@ var index = function(req, res){
 	});
 };
 
+exports.boardmap = boardmap;
+exports.resourceIDToBoard = resourceIDToBoard;
 exports.addRoutes = function(app) {
 	app.get('/', index);
 	alertRoutes.addRoutes(app);
-}
+};

@@ -1,6 +1,10 @@
 var alerts = require('./models/alerts');
+var config = require('./config');
+var alertroute = require('./routes/index');
 
 var connected = false;
+var phone = false;
+var cooldown = {};
 
 //Grumble!  We have devices in the wild that don't constrain to defaults!
 var deviceExceptions = {
@@ -46,7 +50,33 @@ var retrieveOptions = function(row) {
 };
 
 var triggerAlert = function(row, data, feedVar) {
-	console.log("*****"+feedVar+" in "+row.feed+" is over threshold, notifying "+row.smsnum);
+	console.log("*****"+feedVar+" in "+row.feed+
+		" is over threshold");
+	var key = row.smsnum+row.resourceid;
+	if (!(key in cooldown)){
+		console.log("notifying "+row.smsnum);
+		if (phone){
+			var board = alertroute.resourceIDToBoard(row.resourceid);
+			var d=new Date();
+			phone.sendSms({
+				to: row.smsnum, // Any number Twilio can deliver to
+				from: config.twilio.outgoing,
+				body: "Swarm Alert: "+board+" "+row.feed+
+					" has exceeded the threshold of "+row.thresh+
+					" Measured at "+data[feedVar].toFixed(3)+" at "+
+					d.toUTCString()
+			}, function(err, responseData) {
+				if (!err) {
+					console.log("Message status: "+responseData.status);
+					cooldown[key] = setTimeout(function() {
+						delete cooldown[key];
+					}, 5000);
+				} else {
+					console.log("ERR: Twilio error: ",err);
+				}
+			});
+		}
+	}
 };
 
 var onmessage = function(message) {
@@ -110,7 +140,7 @@ var ondisconnect = function() {
 	connected = false;
 };
 
-exports.attach = function(swarm) {
+exports.attach = function(swarm, twilio) {
 	console.log("Launching AlertService");
 	swarm.on('message', onmessage);
 	swarm.on('error', onerror);
@@ -118,4 +148,5 @@ exports.attach = function(swarm) {
 	swarm.on('presence', onpresence);
 	swarm.on('disconnect', ondisconnect);
 	swarm.connect();
+	phone = twilio;
 };
