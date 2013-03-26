@@ -1,9 +1,9 @@
 var boardmap = {
-	iphone: '8dac20b5f617f99d7aa83158a26a81e75a0118c4',
-	rtx: 'a2971cceb73e8aba1077aeaeb64ba666e79b2588',
-	rl78g14: '55acc001d002e95de4c0885320efd4d52f0da95a',
-	example: 'eb81af58239ac15f07f3643688069190145e852f',
-	android: '2daac3fb26879b53cc78a525b4f656e69ef55647'
+	Prius: '8dac20b5f617f99d7aa83158a26a81e75a0118c4',		//iphone
+	Mini: 'a2971cceb73e8aba1077aeaeb64ba666e79b2588',		//rtx
+	rl78g14: '55acc001d002e95de4c0885320efd4d52f0da95a',	//rl78g14
+	example: 'eb81af58239ac15f07f3643688069190145e852f',	//example
+	F150: '2daac3fb26879b53cc78a525b4f656e69ef55647'		//android
 };
 
 function delItem(id) {
@@ -41,7 +41,7 @@ function addItem(obj) {
 function createObj() {
 	var newobj = {
 		smsnum: $('input#smsnum').val(),
-		swarmid: '156161a2b25b9d6d38b39e41d3c4ebabc59cb5c7',
+		swarmid: '7179acadcf2ebfe425459a21ead970484fefc017',
 		resourceid: $('input#resourceid').val(),
 		feed: $('input#feed').val(),
 		thresh: $('input#thresh').val()
@@ -80,7 +80,7 @@ $(document).ready(function() {
 		console.log(JSON.stringify(message));
 		if ((message.from.resource === boardmap.rtx) &&
 			("AccelX" in message.payload)){
-			$('div#rtxchart').swarmChart('update', {
+			$('div#minichart').swarmChart('update', {
 				x:message.payload.AccelX,
 				y:message.payload.AccelY,
 				z:message.payload.AccelZ}
@@ -88,7 +88,7 @@ $(document).ready(function() {
 		} else if ((message.from.resource === boardmap.iphone) &&
 			("Acceleration" in message.payload) &&
 			(message.payload.Acceleration != "No data")){
-			$('div#iphonechart').swarmChart('update', {
+			$('div#f150chart').swarmChart('update', {
 				x:message.payload.Acceleration.x,
 				y:message.payload.Acceleration.y,
 				z:message.payload.Acceleration.z}
@@ -96,7 +96,7 @@ $(document).ready(function() {
 		} else if ((message.from.resource === boardmap.android) &&
 			("Acceleration" in message.payload) &&
 			(message.payload.Acceleration != "No data")){
-			$('div#androidchart').swarmChart('update', {
+			$('div#priuschart').swarmChart('update', {
 				x:message.payload.Acceleration.x,
 				y:message.payload.Acceleration.y,
 				z:message.payload.Acceleration.z}
@@ -107,7 +107,7 @@ $(document).ready(function() {
 					resource: '433aa8bf77197e0d169b4dcae5cd914f97f1a5dd',
 					swarms: ['7179acadcf2ebfe425459a21ead970484fefc017'],
 					onmessage: manualUpdater });
-	$('div#iphonechart').swarmChart({
+	$('div#f150chart').swarmChart({
 		width: 300,
 		height: 200,
 		chart: {
@@ -120,7 +120,7 @@ $(document).ready(function() {
 		resource: '8dac20b5f617f99d7aa83158a26a81e75a0118c4',
 		feed: 'Acceleration'
 	});
-	$('div#rtxchart').swarmChart({
+	$('div#minichart').swarmChart({
 		width: 300,
 		height: 200,
 		chart: {
@@ -137,7 +137,7 @@ $(document).ready(function() {
 		feedVars: ['x','y','z'],
 		numaxes: 3
 	});
-	$('div#androidchart').swarmChart({
+	$('div#priuschart').swarmChart({
 		width: 300,
 		height: 200,
 		swarm: SWARM,

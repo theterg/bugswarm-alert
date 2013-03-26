@@ -2,33 +2,33 @@
 <div>
 	<h3 class=center>Live Acceleration Data:</h3>
 	<ul class="horiz-even">
-		<li><div id="iphonechart"></div></li>
-		<li><div id="rtxchart"></div></li>
-		<li><div id="androidchart"></div></li>
+		<li><div id="minichart"></div></li>
+		<li><div id="f150chart"></div></li>
+		<li><div id="priuschart"></div></li>
 	</ul>
 </div>
 
 <h3 class=center>Edit an Alert:</h3>
 <table id=alerts class="table table-bordered table-striped">
 		<tr>
-			<th>SMS</th>
-			<th>Board ID</th>
-			<th>Feed</th>
-			<th>Threshold</th>
+			<th>Send SMS to:</th>
+			<th>Vehicle ID</th>
+			<th>Data Source</th>
+			<th>Trigger Level</th>
 			<th>Actions</th>
 		</tr>
 		<tr>
-			<td><input id=smsnum value="Enter Phone #"></input></td>
-			<td><input id=resourceid value="Select an icon below"></input></td>
-			<td><input id=feed value="Acceleration"></input></td>
-			<td><input id=thresh value="1.0"></input></td>
+			<td><input id="smsnum"></input></td>
+			<td><input id="resourceid" value="Select an icon below"></input></td>
+			<td><input id="feed" value="Acceleration"></input></td>
+			<td><input id="thresh" value="1.0"></input></td>
 			<td><button class=button onclick="createObj();">Add</button></td>
 		</tr>
 			<td colspan="5">
 			<ul class="horiz-even horiz-fill">
-				<li><a onclick="selectRes('iphone');" class=resourceicon style="background-image: url(images/mini_full.png);"></a></li>
-				<li><a onclick="selectRes('rtx');" class=resourceicon style="background-image: url(images/F150_full.png);"></a></li>
-				<li><a onclick="selectRes('android');" class=resourceicon style="background-image: url(images/prius_full.png);"></a></li>
+				<li><a onclick="selectRes('Mini');" class=resourceicon style="background-image: url(images/mini_full.png);"></a></li>
+				<li><a onclick="selectRes('F150');" class=resourceicon style="background-image: url(images/F150_full.png);"></a></li>
+				<li><a onclick="selectRes('Prius');" class=resourceicon style="background-image: url(images/prius_full.png);"></a></li>
 			</ul>
 			</td>
 </table>
@@ -36,10 +36,10 @@
 <h3 class=center>List of alerts:</h3>
 <table id=alerts class="table table-bordered table-striped table-hover">
 		<tr>
-			<th>SMS</th>
-			<th>Board ID</th>
-			<th>Feed</th>
-			<th>Threshold</th>
+			<th>SMS Number</th>
+			<th>Vehicle ID</th>
+			<th>Data Source</th>
+			<th>Trigger Level</th>
 			<th>Actions</th>
 		</tr>
 	<% for(var idx in alerts) {
