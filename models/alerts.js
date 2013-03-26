@@ -10,7 +10,7 @@ var getAll = function(callback) {
 };
 
 var getBySwarm = function(swarmid, resourceid, callback) {
-	db.all("SELECT * FROM alerts WHERE swarmid=?, resourceid=?", 
+	db.all("SELECT * FROM alerts WHERE swarmid=? AND resourceid=?",
 		swarmid, resourceid, function(err, rows) {
 		if (typeof(callback) === "function") {
 			callback(err, rows);
@@ -28,7 +28,7 @@ var getID = function(id, callback) {
 
 var addAlert = function(obj, callback) {
 	db.run("INSERT INTO alerts "+
-		"(smsnum, swarmid, resourceid, feed, thresh) VALUES (?,?,?,?,?)", 
+		"(smsnum, swarmid, resourceid, feed, thresh) VALUES (?,?,?,?,?)",
 		obj.smsnum, obj.swarmid, obj.resourceid, obj.feed, obj.thresh, callback
 	);
 };
@@ -40,7 +40,7 @@ var delAlert = function(id, callback) {
 var updateAlert = function(obj, callback) {
 	db.run("UPDATE alerts SET "+
 		"smsnum=?, swarmid=?, resourceid=?, feed=?, thresh=? "+
-		"WHERE id=?", 
+		"WHERE id=?",
 		obj.smsnum, obj.swarmid, obj.resourceid, obj.feed, obj.thresh, obj.id,
 		callback
 	);

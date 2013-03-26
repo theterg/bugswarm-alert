@@ -53,7 +53,9 @@ var create = function(req, res){
 			alerts.addAlert(obj, function(err) {
 				console.log(JSON.stringify(err));
 				if (err) { res.send(500, JSON.stringify(err)); }
-				else { res.send(201, "Added"); }
+				else {
+					res.send(201, "Added");
+				}
 			});
 		}
 	});
@@ -76,7 +78,9 @@ var update = function(req, res) {
 			obj.id = req.params.id;
 			alerts.updateAlert(obj, function(err) {
 				if (err) { res.send(500, JSON.stringify(err)); }
-				else { res.send(200, "Updated"); }
+				else {
+					res.send(200, "Updated");
+				}
 			});
 		}
 	});

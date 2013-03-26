@@ -3,13 +3,16 @@
  * Module dependencies.
  */
 
+process.env.NODE_ENV = 'production';
+
 var express = require('express'),
   engine = require('ejs-locals'),
   routes = require('./routes'),
   http = require('http'),
   path = require('path'),
-  config = require('./config');
-  //SwarmConnection = require('bugswarm-prt').Swarm;
+  config = require('./config'),
+  SwarmConnection = require('bugswarm-prt').Swarm,
+  AlertService = require('./alertservice');
 
 var app = express();
 
@@ -38,4 +41,5 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
 
-//var consumer = new SwarmConnection(config);
+var swarm = new SwarmConnection(config);
+AlertService.attach(swarm);
