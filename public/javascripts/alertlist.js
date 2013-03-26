@@ -78,14 +78,14 @@ function resourceIDToBoard(resourceid) {
 $(document).ready(function() {
 	var manualUpdater = function(message) {
 		console.log(JSON.stringify(message));
-		if ((message.from.resource === boardmap.rtx) &&
+		if ((message.from.resource === boardmap.Mini) &&
 			("AccelX" in message.payload)){
 			$('div#minichart').swarmChart('update', {
 				x:message.payload.AccelX,
 				y:message.payload.AccelY,
 				z:message.payload.AccelZ}
 			);
-		} else if ((message.from.resource === boardmap.iphone) &&
+		} else if ((message.from.resource === boardmap.F150) &&
 			("Acceleration" in message.payload) &&
 			(message.payload.Acceleration != "No data")){
 			$('div#f150chart').swarmChart('update', {
@@ -93,7 +93,7 @@ $(document).ready(function() {
 				y:message.payload.Acceleration.y,
 				z:message.payload.Acceleration.z}
 			);
-		} else if ((message.from.resource === boardmap.android) &&
+		} else if ((message.from.resource === boardmap.Prius) &&
 			("Acceleration" in message.payload) &&
 			(message.payload.Acceleration != "No data")){
 			$('div#priuschart').swarmChart('update', {
